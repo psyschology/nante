@@ -1,0 +1,3164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanté Patisserie & Cake Studio | Bespoke & Classic Cakes</title>
+    
+    <!-- 
+      CDO NOTE:
+      Loading our brand fonts directly. 'Playfair Display' for all headings 
+      to convey luxury and heritage. 'Inter' for all body text for its 
+      clean, premium readability.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- 
+      CTO NOTE:
+      All CSS is contained within this single <style> tag as requested.
+      We are using CSS variables (see :root) for theme management. This makes
+      adjusting the entire brand palette trivial and is best-practice.
+    -->
+    <style>
+      /* * =========================================
+       * ROOT & VARIABLE DEFINITIONS (CDO)
+       * =========================================
+       * This is the core of our brand's visual identity.
+      */
+      :root {
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+        
+        --color-cream: #fdfbf6;
+        --color-soft-pink: #f3e8e8;
+        --color-maroon: #5d0016;
+        --color-maroon-dark: #4a0012;
+        --color-gold: #c09a3e;
+        --color-gold-light: #dcb253;
+        --color-text: #333;
+        --color-text-light: #666;
+        --color-border: #e0e0e0;
+        
+        --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+        
+        --transition-fast: all 0.2s ease-in-out;
+        --transition-med: all 0.4s ease-in-out;
+        
+        --container-width: 1280px;
+        --border-radius: 8px;
+      }
+
+      /* * =========================================
+       * GLOBAL RESET & BASE STYLING (CTO/CDO)
+       * =========================================
+      */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        font-weight: 400;
+        line-height: 1.7;
+        color: var(--color-text);
+        background-color: var(--color-cream);
+        overflow-x: hidden; /* Prevent horizontal scroll */
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* * =========================================
+       * TYPOGRAPHY (CDO)
+       * =========================================
+      */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--color-maroon);
+        margin-bottom: 1.5rem;
+      }
+      
+      h1 { font-size: 3.5rem; }
+      h2 { font-size: 2.75rem; }
+      h3 { font-size: 2rem; }
+      h4 { font-size: 1.5rem; }
+      
+      p {
+        margin-bottom: 1.5rem;
+        color: var(--color-text-light);
+        font-size: 1.05rem;
+        max-width: 75ch; /* Improves readability */
+      }
+      
+      a {
+        color: var(--color-gold);
+        text-decoration: none;
+        transition: var(--transition-fast);
+      }
+      
+      a:hover {
+        color: var(--color-gold-light);
+        text-decoration: underline;
+      }
+      
+      .text-gold { color: var(--color-gold); }
+      .text-maroon { color: var(--color-maroon); }
+      .text-center { text-align: center; }
+      .text-small { font-size: 0.9rem; }
+      
+      .serif-font { font-family: var(--font-serif); }
+      .sans-font { font-family: var(--font-sans); }
+      
+      .section-subtitle {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--color-gold);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      /* * =========================================
+       * LAYOUT & UTILITY CLASSES (CTO)
+       * =========================================
+      */
+      .container {
+        width: 100%;
+        max-width: var(--container-width);
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 2rem;
+      }
+      
+      .section {
+        padding: 6rem 0;
+      }
+      
+      .section-condensed {
+        padding: 4rem 0;
+      }
+      
+      .bg-soft-pink { background-color: var(--color-soft-pink); }
+      .bg-cream { background-color: var(--color-cream); }
+      .bg-maroon { background-color: var(--color-maroon); }
+      
+      .grid {
+        display: grid;
+        gap: 2.5rem;
+      }
+      
+      .grid-2-col { grid-template-columns: 1fr 1fr; }
+      .grid-3-col { grid-template-columns: repeat(3, 1fr); }
+      .grid-4-col { grid-template-columns: repeat(4, 1fr); }
+      
+      .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .flex-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .align-center {
+        align-items: center;
+      }
+      
+      /* Spacing utilities */
+      .mt-1 { margin-top: 0.5rem; }
+      .mt-2 { margin-top: 1rem; }
+      .mt-4 { margin-top: 2rem; }
+      .mt-6 { margin-top: 4rem; }
+      
+      .mb-1 { margin-bottom: 0.5rem; }
+      .mb-2 { margin-bottom: 1rem; }
+      .mb-4 { margin-bottom: 2rem; }
+      .mb-6 { margin-bottom: 4rem; }
+      
+      /* * =========================================
+       * BUTTONS & FORMS (CDO)
+       * =========================================
+       * Our two primary CTAs. Primary (maroon) for "action".
+       * Secondary (gold) for "discovery".
+      */
+      .btn {
+        font-family: var(--font-sans);
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.9rem 2.2rem;
+        border-radius: var(--border-radius);
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: var(--transition-med);
+        text-decoration: none !important;
+        line-height: 1.4;
+        text-align: center;
+      }
+      
+      .btn-primary {
+        background-color: var(--color-maroon);
+        color: var(--color-cream);
+        border-color: var(--color-maroon);
+      }
+      
+      .btn-primary:hover {
+        background-color: var(--color-maroon-dark);
+        border-color: var(--color-maroon-dark);
+        color: var(--color-cream);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      
+      .btn-secondary {
+        background-color: var(--color-gold);
+        color: var(--color-maroon);
+        border-color: var(--color-gold);
+      }
+      
+      .btn-secondary:hover {
+        background-color: var(--color-gold-light);
+        border-color: var(--color-gold-light);
+        color: var(--color-maroon);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      
+      .btn-outline-gold {
+        background-color: transparent;
+        color: var(--color-gold);
+        border-color: var(--color-gold);
+      }
+      
+      .btn-outline-gold:hover {
+        background-color: var(--color-gold);
+        color: var(--color-maroon);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      
+      .btn-outline-maroon {
+        background-color: transparent;
+        color: var(--color-maroon);
+        border-color: var(--color-maroon);
+      }
+      
+      .btn-outline-maroon:hover {
+        background-color: var(--color-maroon);
+        color: var(--color-cream);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      
+      .btn-link {
+        background: none;
+        border: none;
+        color: var(--color-gold);
+        text-decoration: underline;
+        padding: 0;
+        font-size: 1rem;
+        font-family: var(--font-sans);
+        cursor: pointer;
+      }
+      .btn-link:hover {
+        color: var(--color-maroon);
+      }
+      
+      .btn-small {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .btn-full {
+        width: 100%;
+        display: block;
+      }
+      
+      /* Form Styling */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-maroon);
+        margin-bottom: 0.5rem;
+      }
+      
+      .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+        font-family: var(--font-sans);
+        color: var(--color-text);
+        background-color: #fff;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        transition: var(--transition-fast);
+      }
+      
+      .form-control:focus {
+        outline: none;
+        border-color: var(--color-gold);
+        box-shadow: 0 0 0 3px rgba(192, 154, 62, 0.2);
+      }
+      
+      textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+      }
+      
+      .form-check {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      
+      .form-check-input {
+        margin-right: 0.75rem;
+        width: 1.2em;
+        height: 1.2em;
+      }
+      
+      .form-check-label {
+        margin-bottom: 0;
+        color: var(--color-text-light);
+      }
+
+      /* Quantity Selector */
+      .quantity-selector {
+        display: flex;
+        align-items: center;
+        max-width: 150px;
+      }
+      
+      .quantity-btn {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--color-border);
+        background-color: #fff;
+        color: var(--color-maroon);
+        font-size: 1.5rem;
+        font-weight: 300;
+        cursor: pointer;
+        transition: var(--transition-fast);
+      }
+      .quantity-btn:hover {
+        background-color: var(--color-soft-pink);
+      }
+      
+      .quantity-input {
+        width: 50px;
+        height: 40px;
+        text-align: center;
+        border: 1px solid var(--color-border);
+        border-left: none;
+        border-right: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        -moz-appearance: textfield;
+      }
+      .quantity-input::-webkit-outer-spin-button,
+      .quantity-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* * =========================================
+       * HEADER & NAVIGATION (CDO)
+       * =========================================
+       * This is the anchor of the site. It must be elegant,
+       * functional, and responsive.
+      */
+      .site-header {
+        position: sticky; /* Modern sticky header */
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(253, 251, 246, 0.95); /* Semi-transparent cream */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1.5rem 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--color-soft-pink);
+        box-shadow: var(--shadow-sm);
+      }
+      
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .logo {
+        font-family: var(--font-serif);
+        font-size: 2.25rem;
+        font-weight: 500;
+        color: var(--color-maroon);
+        text-decoration: none;
+        letter-spacing: -0.5px;
+      }
+      .logo:hover {
+        text-decoration: none;
+        color: var(--color-maroon);
+      }
+      
+      .main-nav {
+        display: flex;
+        align-items: center;
+      }
+      
+      .nav-links {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .nav-links li {
+        margin-left: 2.5rem;
+      }
+      
+      .nav-link {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--color-text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.5rem 0;
+        position: relative;
+        transition: var(--transition-fast);
+        cursor: pointer;
+      }
+      
+      /* Active state underline */
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-gold);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+      }
+      
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--color-maroon);
+      }
+      
+      .nav-link.active::after {
+        transform: scaleX(1);
+      }
+      
+      .nav-icons {
+        display: flex;
+        align-items: center;
+        margin-left: 2.5rem;
+      }
+      
+      .cart-icon-wrapper {
+        position: relative;
+        cursor: pointer;
+      }
+      
+      .cart-icon {
+        width: 26px;
+        height: 26px;
+        color: var(--color-maroon);
+        transition: var(--transition-fast);
+      }
+      .cart-icon-wrapper:hover .cart-icon {
+        color: var(--color-gold);
+      }
+      
+      .cart-item-count {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background-color: var(--color-gold);
+        color: var(--color-maroon);
+        font-size: 0.75rem;
+        font-weight: 700;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      /* Mobile Nav Toggle */
+      .mobile-menu-toggle {
+        display: none; /* Hidden on desktop */
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1002;
+        margin-left: 1.5rem;
+      }
+      
+      .mobile-menu-toggle-icon {
+        width: 28px;
+        height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      .mobile-menu-toggle-icon span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--color-maroon);
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* * =========================================
+       * PAGE TRANSITION SYSTEM (CTO)
+       * =========================================
+       * This JS-driven system simulates page navigation.
+       * 'active' pages are visible, others are hidden.
+      */
+      .page {
+        display: none;
+        opacity: 0;
+        animation: pageFadeIn 0.6s ease forwards;
+      }
+      
+      .page.active {
+        display: block;
+      }
+      
+      @keyframes pageFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* * =========================================
+       * PAGE: HOME (CDO)
+       * =========================================
+      */
+      
+      /* Hero Section */
+      .hero-section {
+        min-height: calc(100vh - 90px); /* 90px is header height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: url('https://placehold.co/1800x1200/f3e8e8/5d0016?text=Nanté+Signature+Creation') no-repeat center center/cover;
+        background-attachment: fixed; /* Parallax effect */
+        position: relative;
+        padding: 6rem 0;
+      }
+      
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(253, 251, 246, 0.6); /* Cream overlay */
+      }
+      
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        animation: contentFadeInUp 0.8s ease 0.2s forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      
+      .hero-content .section-subtitle {
+        font-size: 1.5rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 5.5rem;
+        font-weight: 500;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.25rem;
+        color: var(--color-text);
+        margin-bottom: 2.5rem;
+      }
+      
+      .hero-buttons .btn {
+        margin: 0 0.75rem;
+      }
+      
+      @keyframes contentFadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Funnel Section */
+      .funnel-card {
+        padding: 3rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+        transition: var(--transition-med);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      .funnel-card h3 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .funnel-card p {
+        margin-bottom: 2rem;
+        max-width: 45ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .funnel-card-shop {
+        background: url('https://placehold.co/800x600/fdfbf6/a0a0a0?text=Classic+Tarts') no-repeat center center/cover;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .funnel-card-studio {
+        background: url('https://placehold.co/800x600/fdfbf6/a0a0a0?text=Bespoke+Wedding+Cake') no-repeat center center/cover;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .funnel-card-overlay {
+        position: relative;
+        z-index: 2;
+        padding: 3rem;
+        background-color: rgba(243, 232, 232, 0.9); /* Soft Pink overlay */
+        border-radius: var(--border-radius);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition-med);
+      }
+      
+      .funnel-card:hover .funnel-card-overlay {
+        background-color: rgba(243, 232, 232, 0.95);
+        transform: scale(1.03);
+      }
+      
+      /* Instagram Feed Section */
+      .instagram-feed-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.5rem;
+      }
+      
+      .insta-post {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-md);
+      }
+      
+      .insta-post img {
+        transition: var(--transition-med);
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+      
+      .insta-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(93, 0, 22, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: var(--transition-med);
+        color: var(--color-cream);
+        font-size: 2rem;
+      }
+      
+      .insta-post:hover .insta-overlay {
+        opacity: 1;
+      }
+      
+      .insta-post:hover img {
+        transform: scale(1.1);
+      }
+      
+      .instagram-feed-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      /* * =========================================
+       * PAGE: SHOP CLASSICS (CDO)
+       * =========================================
+      */
+      .page-header {
+        text-align: center;
+        padding: 4rem 0;
+        background-color: var(--color-soft-pink);
+        margin-bottom: 6rem;
+      }
+      
+      .page-header h1 {
+        font-size: 4rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .page-header p {
+        font-size: 1.15rem;
+        max-width: 60ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+      }
+      
+      .product-card {
+        background-color: #fff;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        transition: var(--transition-med);
+        text-align: center;
+      }
+      
+      .product-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+      }
+      
+      .product-card-image-link {
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .product-card-image {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .product-card-image img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        transition: var(--transition-med);
+      }
+      
+      .product-card:hover .product-card-image img {
+        transform: scale(1.05);
+      }
+      
+      .product-card-content {
+        padding: 2rem;
+      }
+      
+      .product-card-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--color-maroon);
+        margin-bottom: 0.5rem;
+        text-decoration: none;
+      }
+      .product-card-image-link:hover .product-card-title {
+        color: var(--color-gold);
+      }
+      
+      .product-card-price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--color-gold);
+        margin-bottom: 1.5rem;
+      }
+
+      /* * =========================================
+       * PAGE: PRODUCT DETAIL PAGE (PDP) (CTO/CDO)
+       * =========================================
+      */
+      .pdp-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 4rem;
+        align-items: flex-start;
+      }
+      
+      .pdp-image-gallery {
+        position: sticky;
+        top: 120px; /* Header height + padding */
+      }
+      
+      .pdp-main-image img {
+        width: 100%;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+      
+      .pdp-details {
+        padding-top: 1rem;
+      }
+      
+      .pdp-details h1 {
+        font-size: 3.5rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+      
+      .pdp-price {
+        font-family: var(--font-serif);
+        font-size: 2.25rem;
+        color: var(--color-gold);
+        margin-bottom: 2rem;
+      }
+      
+      .pdp-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+      }
+      
+      .pdp-actions {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      
+      .pdp-actions .btn {
+        flex: 1;
+      }
+
+      /* * =========================================
+       * PAGE: THE CUSTOM STUDIO (CDO)
+       * =========================================
+      */
+      .studio-hero {
+        text-align: center;
+        padding: 6rem 0;
+        background: url('https://placehold.co/1800x1000/f3e8e8/5d0016?text=Custom+Design+Sketch') no-repeat center center/cover;
+        background-attachment: fixed;
+        position: relative;
+      }
+      
+      .studio-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(253, 251, 246, 0.85);
+      }
+      
+      .studio-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      
+      .studio-hero-content h1 {
+        font-size: 4.5rem;
+      }
+      
+      .studio-hero-content p {
+        font-size: 1.25rem;
+        color: var(--color-text);
+        margin-bottom: 2.5rem;
+      }
+      
+      /* Consultation Form */
+      .consult-form-wrapper {
+        max-width: 900px;
+        margin: 4rem auto 0 auto;
+        background-color: #fff;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        padding: 3rem 4rem;
+        overflow: hidden;
+      }
+      
+      .consult-progress-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+      
+      .consult-progress-bar::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-border);
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+      
+      #consult-progress-line {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 0%; /* JS will update this */
+        height: 2px;
+        background-color: var(--color-gold);
+        transform: translateY(-50%);
+        z-index: 2;
+        transition: width 0.4s ease;
+      }
+      
+      .consult-progress-step {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+      }
+      
+      .progress-step-dot {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 2px solid var(--color-border);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 0.5rem auto;
+        transition: var(--transition-med);
+        font-weight: 600;
+        color: var(--color-text-light);
+      }
+      
+      .progress-step-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--color-text-light);
+        transition: var(--transition-med);
+      }
+      
+      .consult-progress-step.active .progress-step-dot {
+        background-color: var(--color-gold);
+        border-color: var(--color-gold);
+        color: var(--color-maroon);
+        transform: scale(1.1);
+      }
+      
+      .consult-progress-step.active .progress-step-label {
+        color: var(--color-maroon);
+        font-weight: 600;
+      }
+      
+      .form-step {
+        display: none;
+        animation: formStepFadeIn 0.5s ease;
+      }
+      
+      .form-step.active {
+        display: block;
+      }
+      
+      @keyframes formStepFadeIn {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      .form-step h3 {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      
+      .form-step-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3rem;
+        border-top: 1px solid var(--color-border);
+        padding-top: 2rem;
+      }
+      
+      #consult-form-success {
+        display: none;
+        text-align: center;
+        padding: 4rem 2rem;
+      }
+      
+      #consult-form-success h3 {
+        font-size: 2.25rem;
+      }
+
+      /* * =========================================
+       * PAGE: GALLERY (CDO)
+       * =========================================
+      */
+      .gallery-grid {
+        /* Using CSS Grid for a clean masonry-like effect */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+      }
+      
+      .gallery-item img {
+        transition: var(--transition-med);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .gallery-item-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(93, 0, 22, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: var(--transition-med);
+        color: var(--color-cream);
+        padding: 2rem;
+        text-align: center;
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+      }
+      
+      .gallery-item:hover .gallery-item-overlay {
+        opacity: 1;
+      }
+      
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+      
+      /* Simple lightbox simulation */
+      .lightbox-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.85);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        animation: pageFadeIn 0.3s ease;
+      }
+      
+      .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+      }
+      
+      .lightbox-content img {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: var(--border-radius);
+      }
+      
+      .lightbox-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        font-size: 3rem;
+        color: #fff;
+        font-weight: 300;
+        cursor: pointer;
+      }
+
+      /* * =========================================
+       * PAGE: ABOUT (CDO)
+       * =========================================
+      */
+      .about-content {
+        align-items: center;
+      }
+      
+      .about-image {
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+      }
+      
+      .about-text h2 {
+        font-size: 3.5rem;
+      }
+
+      /* * =========================================
+       * FOOTER (CDO)
+       * =========================================
+      */
+      .site-footer {
+        background-color: var(--color-maroon);
+        color: var(--color-soft-pink);
+        padding: 5rem 0;
+        margin-top: 6rem;
+      }
+      
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 3rem;
+      }
+      
+      .footer-logo {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        color: var(--color-cream);
+        margin-bottom: 1.5rem;
+        text-decoration: none;
+      }
+      .footer-logo:hover {
+        text-decoration: none;
+      }
+      
+      .footer-about p {
+        color: var(--color-soft-pink);
+        opacity: 0.8;
+        font-size: 0.95rem;
+        max-width: 40ch;
+      }
+      
+      .footer-widget h4 {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--color-gold);
+        margin-bottom: 1.5rem;
+      }
+      
+      .footer-links {
+        list-style: none;
+      }
+      
+      .footer-links li {
+        margin-bottom: 0.75rem;
+      }
+      
+      .footer-links a {
+        color: var(--color-soft-pink);
+        opacity: 0.8;
+        text-decoration: none;
+        transition: var(--transition-fast);
+      }
+      
+      .footer-links a:hover {
+        color: #fff;
+        opacity: 1;
+        text-decoration: underline;
+        padding-left: 5px;
+      }
+      
+      .footer-contact p {
+        color: var(--color-soft-pink);
+        opacity: 0.8;
+        margin-bottom: 0.75rem;
+      }
+      
+      .footer-socials {
+        display: flex;
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+      }
+      
+      .social-link {
+        color: var(--color-soft-pink);
+        opacity: 0.8;
+        font-size: 1.5rem;
+      }
+      .social-link:hover {
+        color: #fff;
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      
+      .footer-bottom {
+        border-top: 1px solid rgba(243, 232, 232, 0.2);
+        margin-top: 4rem;
+        padding-top: 2rem;
+        text-align: center;
+      }
+      
+      .footer-bottom p {
+        font-size: 0.9rem;
+        color: var(--color-soft-pink);
+        opacity: 0.7;
+        margin: 0;
+      }
+
+      /* * =========================================
+       * MODAL & CHECKOUT FLOW (CTO/CDO)
+       * =========================================
+       * This is a full-screen modal system that slides in from
+       * the right. This feels more like a native app and
+       * is more "expensive" than a simple popup.
+      */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+      }
+      
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .modal-content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 550px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .modal-overlay.active .modal-content {
+        transform: translateX(0);
+      }
+      
+      .modal-header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      
+      .modal-title {
+        font-family: var(--font-serif);
+        font-size: 1.75rem;
+        color: var(--color-maroon);
+        margin: 0;
+      }
+      
+      .modal-close-btn {
+        font-family: var(--font-sans);
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--color-text-light);
+        background: none;
+        border: none;
+        cursor: pointer;
+        line-height: 1;
+        transition: var(--transition-fast);
+      }
+      .modal-close-btn:hover {
+        color: var(--color-maroon);
+        transform: rotate(90deg);
+      }
+      
+      .modal-body {
+        padding: 2.5rem 2rem;
+        overflow-y: auto;
+        flex-grow: 1;
+      }
+      
+      /* Checkout Step System */
+      .checkout-step {
+        display: none;
+      }
+      .checkout-step.active {
+        display: block;
+        animation: pageFadeIn 0.4s ease;
+      }
+      
+      /* Step 1: Cart Summary */
+      .cart-item {
+        display: flex;
+        gap: 1.5rem;
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .cart-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      
+      .cart-item-image img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+      }
+      
+      .cart-item-details {
+        flex: 1;
+      }
+      
+      .cart-item-title {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        color: var(--color-maroon);
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+      }
+      
+      .cart-item-price {
+        font-size: 1rem;
+        color: var(--color-gold);
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+      
+      .cart-item-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .cart-item-actions .quantity-selector {
+        max-width: 120px;
+      }
+      .cart-item-actions .quantity-btn { height: 32px; width: 32px; font-size: 1.2rem; }
+      .cart-item-actions .quantity-input { height: 32px; width: 40px; font-size: 1rem; }
+      
+      .cart-item-remove-btn {
+        font-size: 0.8rem;
+        color: var(--color-text-light);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .cart-item-remove-btn:hover {
+        color: var(--color-maroon);
+      }
+      
+      .cart-empty-message {
+        text-align: center;
+        padding: 4rem 0;
+      }
+      .cart-empty-message h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .cart-summary {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid var(--color-border);
+      }
+      
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      
+      .summary-row.total {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--color-maroon);
+        font-family: var(--font-serif);
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px dashed var(--color-border);
+      }
+      
+      .summary-label {
+        font-weight: 500;
+        color: var(--color-text-light);
+      }
+      
+      .summary-value {
+        font-weight: 600;
+        color: var(--color-text);
+      }
+      
+      .checkout-footer {
+        padding: 2rem;
+        border-top: 1px solid var(--color-border);
+        background-color: var(--color-cream);
+        flex-shrink: 0;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+      }
+      
+      /* Step 4: Confirmation */
+      .checkout-success {
+        text-align: center;
+        padding: 4rem 2rem;
+      }
+      
+      .checkout-success-icon {
+        font-size: 5rem;
+        color: var(--color-gold);
+        line-height: 1;
+        margin-bottom: 2rem;
+      }
+      
+      .checkout-success h2 {
+        font-size: 2.25rem;
+      }
+      
+      .checkout-success p {
+        font-size: 1.1rem;
+        max-width: 45ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .order-summary-box {
+        background-color: var(--color-soft-pink);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        text-align: left;
+        margin-top: 2.5rem;
+      }
+      
+      .order-summary-box h4 {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--color-maroon);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(93, 0, 22, 0.1);
+      }
+      
+      .order-summary-box p {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+      }
+      .order-summary-box p strong {
+        color: var(--color-text);
+      }
+      
+      /* * =========================================
+       * RESPONSIVE DESIGN (CTO)
+       * =========================================
+      */
+      
+      @media (max-width: 1024px) {
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.25rem; }
+        
+        .hero-content h1 { font-size: 4rem; }
+
+        .grid-3-col, .grid-4-col, .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .pdp-container {
+          grid-template-columns: 1fr;
+        }
+        
+        .pdp-image-gallery {
+          position: static;
+          top: 0;
+        }
+        
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        
+        .instagram-feed-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .section { padding: 4rem 0; }
+        .container { padding: 0 1.5rem; }
+        
+        h1 { font-size: 2.5rem; }
+        .hero-content h1 { font-size: 3rem; }
+        .hero-content p { font-size: 1.1rem; }
+        .hero-buttons {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .hero-buttons .btn { margin: 0; }
+        
+        /* Mobile Navigation */
+        .main-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background-color: var(--color-cream);
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          padding: 6rem 2rem 2rem 2rem;
+          transform: translateX(100%);
+          transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+          z-index: 1001;
+          overflow-y: auto;
+        }
+        
+        .header-content.mobile-nav-open .main-nav {
+          transform: translateX(0);
+          box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+          flex-direction: column;
+          align-items: flex-start;
+          width: 100%;
+        }
+        
+        .nav-links li {
+          margin: 0;
+          width: 100%;
+        }
+        
+        .nav-link {
+          font-size: 1.5rem;
+          font-family: var(--font-serif);
+          font-weight: 500;
+          color: var(--color-maroon);
+          padding: 1rem 0;
+          display: block;
+          width: 100%;
+          text-transform: none;
+          letter-spacing: 0;
+        }
+        
+        .nav-link::after {
+          display: none; /* No underlines on mobile */
+        }
+        .nav-link.active {
+          color: var(--color-gold);
+        }
+        
+        .nav-icons {
+          margin-left: auto; /* Push icons to the right, next to logo */
+          z-index: 1002;
+        }
+        
+        .cart-icon-wrapper {
+          margin-right: 1.5rem;
+        }
+        
+        .mobile-menu-toggle {
+          display: flex;
+        }
+        
+        /* Hamburger to "X" animation */
+        .header-content.mobile-nav-open .mobile-menu-toggle-icon span:nth-child(1) {
+          transform: rotate(45deg) translate(7px, 7px);
+        }
+        .header-content.mobile-nav-open .mobile-menu-toggle-icon span:nth-child(2) {
+          opacity: 0;
+        }
+        .header-content.mobile-nav-open .mobile-menu-toggle-icon span:nth-child(3) {
+          transform: rotate(-45deg) translate(6px, -6px);
+        }
+        
+        /* Layouts */
+        .grid-2-col { grid-template-columns: 1fr; }
+        
+        .funnel-card {
+          padding: 2rem;
+        }
+        .funnel-card-overlay {
+          padding: 2rem;
+        }
+        
+        .instagram-feed-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .modal-content {
+          max-width: 100vw;
+          width: 100%;
+        }
+        
+        .consult-form-wrapper {
+          padding: 2rem 1.5rem;
+        }
+        
+        .consult-progress-step .progress-step-dot {
+          width: 30px;
+          height: 30px;
+          font-size: 0.9rem;
+        }
+        .progress-step-label {
+          font-size: 0.75rem;
+        }
+      }
+      
+    </style>
+</head>
+<body>
+
+    <!-- 
+      * =========================================
+      * SITE HEADER (CTO)
+      * =========================================
+      * Contains logo, navigation, and cart.
+      * Navigation uses data-navlink attributes for our JS router.
+      * Cart icon has a counter 'cart-item-count'.
+      * Fully responsive with hamburger toggle.
+    -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content" id="header-content">
+                <a href="#" class="logo" data-navlink="home">Nanté</a>
+                
+                <div class="nav-icons">
+                    <div class="cart-icon-wrapper" id="cart-icon-wrapper">
+                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                        </svg>
+                        <span class="cart-item-count" id="cart-item-count">0</span>
+                    </div>
+                    
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                        <span class="mobile-menu-toggle-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </button>
+                </div>
+
+                <nav class="main-nav" id="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="#" class="nav-link active" data-navlink="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-navlink="shop">Shop Classics</a></li>
+                        <li><a href="#" class="nav-link" data-navlink="studio">The Custom Studio</a></li>
+                        <li><a href="#" class="nav-link" data-navlink="gallery">Gallery</a></li>
+                        <li><a href="#" class="nav-link" data-navlink="about">About</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- 
+      * =========================================
+      * MAIN CONTENT WRAPPER (CTO)
+      * =========================================
+      * All "pages" live inside <main>. Only the
+      * one with the 'active' class is visible.
+    -->
+    <main>
+
+        <!-- 
+          * =========================================
+          * PAGE: HOME
+          * =========================================
+        -->
+        <section id="page-home" data-page="home" class="page active">
+            
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content container">
+                    <span class="section-subtitle">Award-Winning Patisserie</span>
+                    <h1>Where Every Occasion Becomes Art</h1>
+                    <p>
+                        From timeless classics to breathtaking bespoke creations, 
+                        Nanté Studio crafts exquisite cakes and pastries that define 
+                        your most cherished moments.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary btn-lg" data-navlink="studio">Design A Custom Cake</a>
+                        <a href="#" class="btn btn-secondary btn-lg" data-navlink="shop">Shop Classic Collection</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 
+              * CTO/CDO NOTE: The Two Funnels
+              * This is the core strategic solution. We immediately and clearly
+              * segment the audience into the two funnels: high-ticket "Studio" 
+              * and e-commerce "Shop".
+            -->
+            <section class="section bg-soft-pink">
+                <div class="container">
+                    <div class="grid grid-2-col">
+                        
+                        <!-- Funnel 1: Shop Classics -->
+                        <div class="funnel-card funnel-card-shop">
+                            <div class="funnel-card-overlay">
+                                <span class="section-subtitle">Ready to Enjoy</span>
+                                <h3>The Classic Collection</h3>
+                                <p>
+                                    Our signature cakes, tarts, and pastries,
+                                    perfected over decades. Ready for pickup or 
+                                    local delivery.
+                                </p>
+                                <a href="#" class="btn btn-outline-maroon" data-navlink="shop">Shop The Classics</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Funnel 2: Custom Studio -->
+                        <div class="funnel-card funnel-card-studio">
+                           <div class="funnel-card-overlay">
+                                <span class="section-subtitle">Your Vision, Realized</span>
+                                <h3>The Custom Studio</h3>
+                                <p>
+                                    A collaborative journey to design a one-of-a-kind
+                                    masterpiece for your wedding, gala, or milestone event.
+                                </p>
+                                <a href="#" class="btn btn-primary" data-navlink="studio">Begin Your Consultation</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 
+              * CTO/CDO NOTE: Simulated Instagram Feed
+              * This builds social proof and showcases the high-end aesthetic.
+              * A real site would use an API, but for a demo, this hard-coded
+              * grid is highly effective and demonstrates our design intent.
+            -->
+            <section class="section bg-cream">
+                <div class="container">
+                    <div class="instagram-feed-header">
+                        <span class="section-subtitle">Follow Our Journey</span>
+                        <h2>@nante.patisserie</h2>
+                        <a href="#" class="btn btn-secondary mt-2">Follow Us on Instagram</a>
+                    </div>
+                    
+                    <div class="instagram-feed-grid">
+                        <div class="insta-post">
+                            <img src="https://placehold.co/400x400/f3e8e8/5d0016?text=Wedding+Cake+Detail" alt="Instagram post of a wedding cake">
+                            <div class="insta-overlay"><span>❤</span></div>
+                        </div>
+                        <div class="insta-post">
+                            <img src="https://placehold.co/400x400/f3e8e8/5d0016?text=Macaron+Tower" alt="Instagram post of a macaron tower">
+                            <div class="insta-overlay"><span>❤</span></div>
+                        </div>
+                        <div class="insta-post">
+                            <img src="https://placehold.co/400x400/f3e8e8/5d0016?text=Hand-Painted+Cake" alt="Instagram post of a hand-painted cake">
+                            <div class="insta-overlay"><span>❤</span></div>
+                        </div>
+                        <div class="insta-post">
+                            <img src="https://placehold.co/400x400/f3e8e8/5d0016?text=Artisan+Tarts" alt="Instagram post of artisan tarts">
+                            <div class="insta-overlay"><span>❤</span></div>
+                        </div>
+                        <div class="insta-post">
+                            <img src="https://placehold.co/400x400/f3e8e8/5d0016?text=Studio+Sketch" alt="Instagram post of a cake sketch">
+                            <div class="insta-overlay"><span>❤</span></div>
+                        </div>
+                        <div class="insta-post">
+                            <img src="https://placehold.co/400x400/f3e8e8/5d0016?text=Sugar+Flowers" alt="Instagram post of sugar flowers">
+                            <div class="insta-overlay"><span>❤</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </section>
+
+        <!-- 
+          * =========================================
+          * PAGE: SHOP CLASSICS (E-COMMERCE FUNNEL)
+          * =========================================
+          * CTO NOTE: The 'product-grid-target' div will be
+          * dynamically populated by our JS 'e-commerce engine'.
+        -->
+        <section id="page-shop" data-page="shop" class="page">
+            
+            <header class="page-header">
+                <div class="container">
+                    <span class="section-subtitle">Nanté Classics</span>
+                    <h1>The Signature Collection</h1>
+                    <p>
+                        Timeless elegance, available to order. Explore our most beloved 
+                        creations, crafted with the finest ingredients and meticulous care.
+                    </p>
+                </div>
+            </header>
+            
+            <section class="section-condensed">
+                <div class="container">
+                    <div class="product-grid" id="product-grid-target">
+                        <!-- 
+                          CTO NOTE: This content is a fallback.
+                          JavaScript will clear and render this section.
+                        -->
+                        <div class="product-card">
+                            <div class="product-card-image">
+                                <img src="https://placehold.co/600x600/f3e8e8/5d0016?text=Loading..." alt="Loading product">
+                            </div>
+                            <div class="product-card-content">
+                                <h4 class="product-card-title">Loading...</h4>
+                                <div class="product-card-price">$0.00</div>
+                                <a href="#" class="btn btn-primary btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </section>
+        
+        <!-- 
+          * =========================================
+          * PAGE: PRODUCT DETAIL PAGE (PDP)
+          * =========================================
+          * CTO NOTE: This page is a "template". JS will find
+          * the elements by ID and populate them based on
+          * which product was clicked.
+        -->
+        <section id="page-pdp" data-page="pdp" class="page">
+            <div class="section">
+                <div class="container">
+                    <div class="pdp-container" id="pdp-content-target">
+                        <!-- Fallback / Structure -->
+                        <div class="pdp-image-gallery">
+                            <div class="pdp-main-image">
+                                <img src="https://placehold.co/800x800/f3e8e8/5d0016?text=Nanté" alt="Product image">
+                            </div>
+                        </div>
+                        <div class="pdp-details">
+                            <h1>Product Title</h1>
+                            <div class="pdp-price">$0.00</div>
+                            <div class="pdp-description">
+                                <p>Loading product details...</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="pdp-quantity" class="form-label">Quantity</label>
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn" data-action="decrease">-</button>
+                                    <input type="number" class="quantity-input" id="pdp-quantity" value="1" min="1">
+                                    <button class="quantity-btn" data-action="increase">+</button>
+                                </div>
+                            </div>
+                            <div class="pdp-actions">
+                                <button class="btn btn-primary btn-full" id="pdp-add-to-cart-btn" data-product-id="">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          * =========================================
+          * PAGE: THE CUSTOM STUDIO (BESPOKE FUNNEL)
+          * =========================================
+          * CTO NOTE: This page has NO "Add to Cart". The
+          * entire funnel is this multi-step consultation
+          * form, which captures high-value leads.
+        -->
+        <section id="page-studio" data-page="studio" class="page">
+
+            <section class="studio-hero">
+                <div class="studio-hero-content container">
+                    <span class="section-subtitle">The Bespoke Journey</span>
+                    <h1>The Custom Studio</h1>
+                    <p>
+                        Welcome to our collaborative design space. This is where your 
+                        vision is transformed into a breathtaking, edible work of art. 
+                        Our process is personal, meticulous, and designed around you.
+                    </p>
+                    <a href="#consult-form" class="btn btn-primary btn-lg">Begin Your Consultation</a>
+                </div>
+            </section>
+            
+            <section class="section" id="consult-form">
+                <div class="container">
+                    
+                    <div class="consult-form-wrapper">
+                        <!-- 
+                          * CTO NOTE: This progress bar is controlled by JS
+                          * to guide the user and manage expectations.
+                        -->
+                        <div class="consult-progress-bar">
+                            <div class="consult-progress-step active" data-step="1">
+                                <div class="progress-step-dot">1</div>
+                                <div class="progress-step-label">Event Details</div>
+                            </div>
+                            <div class="consult-progress-step" data-step="2">
+                                <div class="progress-step-dot">2</div>
+                                <div class="progress-step-label">Design &amp; Flavor</div>
+                            </div>
+                            <div class="consult-progress-step" data-step="3">
+                                <div class="progress-step-dot">3</div>
+                                <div class="progress-step-label">Contact</div>
+                            </div>
+                            <div id="consult-progress-line"></div>
+                        </div>
+                        
+                        <!-- 
+                          * This form is what we present to the client as
+                          * our solution for their high-ticket funnel.
+                        -->
+                        <form id="consultation-form-main">
+                            
+                            <!-- Step 1: Event Details -->
+                            <div class="form-step active" data-form-step="1">
+                                <h3>Step 1: Tell Us About Your Event</h3>
+                                <div class="grid grid-2-col">
+                                    <div class="form-group">
+                                        <label for="event-type" class="form-label">Type of Event</label>
+                                        <select id="event-type" class="form-control">
+                                            <option value="">Please select...</option>
+                                            <option value="wedding">Wedding</option>
+                                            <option value="birthday">Milestone Birthday</option>
+                                            <option value="corporate">Corporate Gala</option>
+                                            <option value="anniversary">Anniversary</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-date" class="form-label">Event Date</label>
+                                        <input type="date" id="event-date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="grid grid-2-col">
+                                    <div class="form-group">
+                                        <label for="event-guests" class="form-label">Number of Guests</label>
+                                        <input type="number" id="event-guests" class="form-control" placeholder="e.g., 150">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-budget" class="form-label">Estimated Budget</label>
+                                        <select id="event-budget" class="form-control">
+                                            <option value="">Please select...</option>
+                                            <option value="1000-2000">$1,000 - $2,000</option>
+                                            <option value="2000-3500">$2,000 - $3,500</option>
+                                            <option value="3500-5000">$3,500 - $5,000</option>
+                                            <option value="5000+">$5,000+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-venue" class="form-label">Event Venue / Location</label>
+                                    <input type="text" id="event-venue" class="form-control" placeholder="Name and address of venue">
+                                </div>
+                                <div class="form-step-buttons">
+                                    <div></div> <!-- Placeholder for spacing -->
+                                    <button type="button" class="btn btn-primary" data-form-next="2">Next Step</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Design & Flavor -->
+                            <div class="form-step" data-form-step="2">
+                                <h3>Step 2: The Vision</h3>
+                                <div class="form-group">
+                                    <label class="form-label">Preferred Flavor Profiles (Select all that apply)</label>
+                                    <div class="grid grid-2-col">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="rich_chocolate" id="check-choc">
+                                            <label class="form-check-label" for="check-choc">Rich & Decadent (e.g., Chocolate, Caramel)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="light_fruity" id="check-fruit">
+                                            <label class="form-check-label" for="check-fruit">Light & Fruity (e.g., Lemon, Raspberry)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="classic_vanilla" id="check-vanilla">
+                                            <label class="form-check-label" for="check-vanilla">Classic & Timeless (e.g., Vanilla Bean, Almond)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="unique_spiced" id="check-spice">
+                                            <label class="form-check-label" for="check-spice">Unique & Spiced (e.g., Chai, Lavender, Cardamom)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="design-inspiration" class="form-label">Design Inspiration</label>
+                                    <textarea id="design-inspiration" class="form-control" placeholder="Describe your vision. Feel free to mention colors, themes, styles (e.g., modern, romantic, minimalist), or provide links to inspiration images."></textarea>
+                                </div>
+                                <div class="form-step-buttons">
+                                    <button type="button" class="btn btn-outline-maroon" data-form-prev="1">Previous</button>
+                                    <button type="button" class="btn btn-primary" data-form-next="3">Next Step</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Contact -->
+                            <div class="form-step" data-form-step="3">
+                                <h3>Step 3: Your Contact Information</h3>
+                                <div class="grid grid-2-col">
+                                    <div class="form-group">
+                                        <label for="contact-name" class="form-label">Full Name</label>
+                                        <input type="text" id="contact-name" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-email" class="form-label">Email Address</label>
+                                        <input type="email" id="contact-email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="grid grid-2-col">
+                                    <div class="form-group">
+                                        <label for="contact-phone" class="form-label">Phone Number</label>
+                                        <input type="tel" id="contact-phone" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-referral" class="form-label">How did you hear about us?</label>
+                                        <input type="text" id="contact-referral" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-step-buttons">
+                                    <button type="button" class="btn btn-outline-maroon" data-form-prev="2">Previous</button>
+                                    <button type="button" class="btn btn-secondary" id="submit-consult-form">Submit Consultation</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                        <!-- Success Message -->
+                        <div id="consult-form-success">
+                            <span class="section-subtitle">Thank You</span>
+                            <h3>Your Consultation is Submitted</h3>
+                            <p>
+                                We have received your preliminary details. Our design
+                                director will personally review your request and contact 
+                                you within two business days to schedule your private consultation.
+                            </p>
+                            <button type="button" class="btn btn-primary" id="consult-form-reset">Start a New Inquiry</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+        </section>
+        
+        <!-- 
+          * =========================================
+          * PAGE: GALLERY
+          * =========================================
+        -->
+        <section id="page-gallery" data-page="gallery" class="page">
+            
+            <header class="page-header">
+                <div class="container">
+                    <span class="section-subtitle">Our Portfolio</span>
+                    <h1>A Legacy in Sugar</h1>
+                    <p>
+                        A selection of our past creations, from intimate celebrations
+                        to grand, multi-tiered wedding centerpieces.
+                    </p>
+                </div>
+            </header>
+            
+            <section class="section-condensed">
+                <div class="container">
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- JS will handle clicks on .gallery-item -->
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x800/f3e8e8/5d0016?text=The+Rosewood+Wedding" alt="The Rosewood Wedding Cake" data-lightbox-src="https://placehold.co/1200x1600/f3e8e8/5d0016?text=The+Rosewood+Wedding">
+                            <div class="gallery-item-overlay">The Rosewood Wedding</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x600/f3e8e8/5d0016?text=Modern+Art+Gala" alt="Modern Art Gala Cake" data-lightbox-src="https://placehold.co/1200x1200/f3e8e8/5d0016?text=Modern+Art+Gala">
+                            <div class="gallery-item-overlay">Modern Art Gala</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x800/f3e8e8/5d0016?text=Spring+Blossom+Tower" alt="Spring Blossom Tower" data-lightbox-src="https://placehold.co/1200x1600/f3e8e8/5d0016?text=Spring+Blossom+Tower">
+                            <div class="gallery-item-overlay">Spring Blossom Tower</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x800/f3e8e8/5d0016?text=Gilded+Anniversary" alt="Gilded Anniversary Cake" data-lightbox-src="https://placehold.co/1200x1600/f3e8e8/5d0016?text=Gilded+Anniversary">
+                            <div class="gallery-item-overlay">The Gilded Anniversary</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x600/f3e8e8/5d0016?text=Minimalist+Tiers" alt="Minimalist Tiered Cake" data-lightbox-src="https://placehold.co/1200x1200/f3e8e8/5d0016?text=Minimalist+Tiers">
+                            <div class="gallery-item-overlay">Minimalist Tiers</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x800/f3e8e8/5d0016?text=Chocolate+Decadence" alt="Chocolate Decadence Cake" data-lightbox-src="https://placehold.co/1200x1600/f3e8e8/5d0016?text=Chocolate+Decadence">
+                            <div class="gallery-item-overlay">Chocolate Decadence</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x600/f3e8e8/5d0016?text=Hand-Painted+Macarons" alt="Hand-Painted Macarons" data-lightbox-src="https://placehold.co/1200x1200/f3e8e8/5d0016?text=Hand-Painted+Macarons">
+                            <div class="gallery-item-overlay">Hand-Painted Macarons</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://placehold.co/600x800/f3e8e8/5d0016?text=The+Autumnal" alt="The Autumnal Wedding Cake" data-lightbox-src="https://placehold.co/1200x1600/f3e8e8/5d0016?text=The+Autumnal">
+                            <div class="gallery-item-overlay">The Autumnal</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </section>
+        
+        <!-- 
+          * =========================================
+          * PAGE: ABOUT
+          * =========================================
+        -->
+        <section id="page-about" data-page="about" class="page">
+            
+            <header class="page-header">
+                <div class="container">
+                    <span class="section-subtitle">Our Story</span>
+                    <h1>Artistry &amp; Passion</h1>
+                    <p>
+                        Nanté Patisserie is more than a cake studio. 
+                        It is the culmination of a lifelong dream, built on a 
+                        foundation of classic technique and contemporary artistry.
+                    </p>
+                </div>
+            </header>
+            
+            <section class="section-condensed">
+                <div class="container">
+                    <div class="grid grid-2-col align-center about-content">
+                        <div class="about-image">
+                            <img src="https://placehold.co/800x1000/f3e8e8/5d0016?text=Chef+Nanté" alt="Portrait of Chef Nanté">
+                        </div>
+                        <div class="about-text">
+                            <span class="section-subtitle">Meet Our Founder</span>
+                            <h2>Chef Eléonore Nanté</h2>
+                            <p>
+                                Trained at the prestigious Le Cordon Bleu in Paris, Chef Nanté 
+                                spent over a decade honing her craft in Michelin-starred restaurants 
+                                across Europe before founding her own studio.
+                            </p>
+                            <p>
+                                Her philosophy is simple: use the finest ingredients, 
+                                respect the process, and never forget that a cake is not just 
+                                dessert—it is the centerpiece of a memory. Her work has been 
+                                featured in Vogue, Harper's Bazaar, and The Knot as a leading 
+                                voice in modern cake design.
+                            </p>
+                            <a href="#" class="btn btn-outline-maroon mt-2" data-navlink="studio">Begin a Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </section>
+        
+    </main>
+
+    <!-- 
+      * =========================================
+      * SITE FOOTER
+      * =========================================
+    -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-widget footer-about">
+                    <a href="#" class="footer-logo" data-navlink="home">Nanté</a>
+                    <p>
+                        The award-winning patisserie &amp; cake studio 
+                        dedicated to creating edible works of art.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <!-- In-line SVG for icons -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Pinterest">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.1-1 .1-2.2.1-3.2 0-5-3.3-8.8-8.2-8.8-5.3 0-8.5 3.6-8.5 7.2 0 2.2 1.2 4.3 3 5.2.3.2.5.1.6-.2.2-1 .4-1.8.4-1.8.1-.4 0-.8-.3-1.1-1-1.2-1.5-2.8-1.5-4.4 0-3.6 2.7-6.5 6.3-6.5 3.5 0 5.6 2.6 5.6 5.9 0 3.7-2 6.3-4.8 6.3-1.9 0-3.3-1.5-2.8-3.4.5-2 1.6-4.1 1.6-5.5 0-1.2- .7-2.3-1.9-2.3-1.5 0-2.7 1.6-2.7 3.8 0 1.4.5 2.5.5 2.5s-1.7 7.2-2 8.4c-.1.3-.6.8-.9.9-1 .8-2.3.2-2.8-1- .3-1-1.2-3.4-1.2-4.9 0-4.1 3.2-7.9 8.3-7.9 4.4 0 7.8 3.3 7.8 7.6 0 2.4-1 4.7-2.9 5.8-1 .5-2.1.3-2.6-.7-.3-.5-.8-1.8-.9-2.2z"></path></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-widget">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-navlink="shop">Shop Classics</a></li>
+                        <li><a href="#" data-navlink="studio">The Custom Studio</a></li>
+                        <li><a href="#" data-navlink="gallery">Gallery</a></li>
+                        <li><a href="#" data-navlink="about">Our Story</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Flavor Menu</a></li>
+                        <li><a href="#">Tasting Boxes</a></li>
+                        <li><a href="#">Wedding Process</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h4>Contact Us</h4>
+                    <div class="footer-contact">
+                        <p>By Appointment Only</p>
+                        <p>123 Luxury Lane, Suite 400<br>Beverly Hills, CA 90210</p>
+                        <p>
+                            <a href="tel:13105550123">(310) 555-0123</a><br>
+                            <a href="mailto:hello@nante.com">hello@nante.com</a>
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Nanté Patisserie &amp; Cake Studio. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+    <!-- 
+      * =========================================
+      * MODAL: LIGHTBOX (for Gallery)
+      * =========================================
+    -->
+    <div class="lightbox-overlay" id="lightbox-overlay">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img src="" alt="Enlarged gallery image" id="lightbox-image">
+        </div>
+    </div>
+
+
+    <!-- 
+      * =========================================
+      * MODAL: CHECKOUT (E-COMMERCE FUNNEL)
+      * =========================================
+      * CTO NOTE: This single modal contains all 4 steps
+      * of the checkout process. JS will toggle the
+      * 'active' class on the 'checkout-step' divs.
+    -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h3 class="modal-title" id="checkout-modal-title">Your Cart</h3>
+                <button class="modal-close-btn" id="checkout-close-btn">&times;</button>
+            </div>
+            
+            <div class="modal-body" id="checkout-modal-body">
+
+                <!-- 
+                  * CHECKOUT STEP 1: CART SUMMARY
+                -->
+                <div class="checkout-step active" data-checkout-step="1">
+                    <div id="cart-items-container">
+                        <!-- JS will render cart items here -->
+                        <div class="cart-empty-message" id="cart-empty-message">
+                            <h3>Your Cart is Empty</h3>
+                            <p>Browse our Classic Collection to find something sweet.</p>
+                            <button class="btn btn-secondary mt-4" id="cart-continue-shopping-btn">Shop The Classics</button>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary" id="cart-summary-box">
+                        <div class="summary-row">
+                            <span class="summary-label">Subtotal</span>
+                            <span class="summary-value" id="cart-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Shipping</span>
+                            <span class="summary-value" id="cart-shipping">Calculated at next step</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span class="summary-label">Total</span>
+                            <span class="summary-value" id="cart-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 
+                  * CHECKOUT STEP 2: SHIPPING DETAILS
+                -->
+                <div class="checkout-step" data-checkout-step="2">
+                    <form id="shipping-form">
+                        <h4 class="mb-4 text-maroon serif-font" style="font-size: 1.5rem;">Shipping Details</h4>
+                        <div class="form-group">
+                            <label for="ship-email" class="form-label">Email Address</label>
+                            <input type="email" id="ship-email" class="form-control" placeholder="you@example.com" required>
+                        </div>
+                        <div class="grid grid-2-col">
+                            <div class="form-group">
+                                <label for="ship-fname" class="form-label">First Name</label>
+                                <input type="text" id="ship-fname" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ship-lname" class="form-label">Last Name</label>
+                                <input type="text" id="ship-lname" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ship-address" class="form-label">Address</label>
+                            <input type="text" id="ship-address" class="form-control" placeholder="123 Luxury Lane" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ship-apt" class="form-label">Apartment, suite, etc. (optional)</label>
+                            <input type="text" id="ship-apt" class="form-control">
+                        </div>
+                        <div class="grid grid-3-col">
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label for="ship-city" class="form-label">City</label>
+                                <input type="text" id="ship-city" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ship-zip" class="form-label">ZIP Code</label>
+                                <input type="text" id="ship-zip" class="form-control" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- 
+                  * CHECKOUT STEP 3: PAYMENT
+                -->
+                <div class="checkout-step" data-checkout-step="3">
+                    <form id="payment-form">
+                        <h4 class="mb-4 text-maroon serif-font" style="font-size: 1.5rem;">Payment Details</h4>
+                        <p class="text-small text-light mb-4">
+                            This is a simulation. Do not enter real credit card information.
+                        </p>
+                        <div class="form-group">
+                            <label for="pay-cardnum" class="form-label">Card Number</label>
+                            <input type="text" id="pay-cardnum" class="form-control" placeholder="**** **** **** 4242" value="**** **** **** 4242">
+                        </div>
+                        <div class="form-group">
+                            <label for="pay-cardname" class="form-label">Name on Card</label>
+                            <input type="text" id="pay-cardname" class="form-control" placeholder="Eléonore Nanté" value="Eléonore Nanté">
+                        </div>
+                        <div class="grid grid-2-col">
+                            <div class="form-group">
+                                <label for="pay-expiry" class="form-label">Expiry (MM/YY)</label>
+                                <input type="text" id="pay-expiry" class="form-control" placeholder="12/28" value="12/28">
+                            </div>
+                            <div class="form-group">
+                                <label for="pay-cvc" class="form-label">CVC</label>
+                                <input type="text" id="pay-cvc" class="form-control" placeholder="123" value="123">
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mt-4">
+                            <input class="form-check-input" type="checkbox" value="" id="billing-same" checked>
+                            <label class="form-check-label" for="billing-same">
+                                Billing address is same as shipping
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- 
+                  * CHECKOUT STEP 4: ORDER CONFIRMATION
+                -->
+                <div class="checkout-step" data-checkout-step="4">
+                    <div class="checkout-success">
+                        <div class="checkout-success-icon">✓</div>
+                        <span class="section-subtitle">Thank You</span>
+                        <h2>Your Order is Confirmed</h2>
+                        <p>
+                            We are delighted to prepare your order. You will receive an
+                            email confirmation shortly with your order details.
+                        </p>
+                        <div class="order-summary-box">
+                            <h4>Order Summary</h4>
+                            <p><strong>Order Number:</strong> <span id="conf-order-num">NTE-10458</span></p>
+                            <p><strong>Total Paid:</strong> <span id="conf-order-total">$0.00</span></p>
+                            <p><strong>Shipping To:</strong> <span id="conf-order-email">you@example.com</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="checkout-footer" id="checkout-footer">
+                <!-- JS will dynamically change this button's text and data-action -->
+                <button class="btn btn-primary btn-full" id="checkout-next-btn" data-checkout-action="next" data-next-step="2">
+                    Proceed to Shipping
+                </button>
+                <button class="btn btn-outline-maroon btn-full mt-2" id="checkout-prev-btn" data-checkout-action="prev" data-prev-step="0" style="display: none;">
+                    Back to Cart
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 
+      * =========================================
+      * JAVASCRIPT APPLICATION (CTO)
+      * =========================================
+      * All application logic is contained here.
+      * This is a robust, single-file application architecture.
+    -->
+    <script>
+    // Wait for the DOM to be fully loaded before initializing
+    document.addEventListener('DOMContentLoaded', () => {
+    
+        /**
+         * =========================================
+         * CTO NOTE: APPLICATION STATE & DATABASE
+         * =========================================
+         * We use a global 'appState' object to manage the entire
+         * simulation's state, including the active page and the
+         * contents of the shopping cart.
+         * * 'productDatabase' simulates our backend product catalog.
+         */
+        
+        const appState = {
+            activePage: 'home',
+            cart: [], // Stores objects: { id, name, price, quantity, image }
+            checkoutStep: 1,
+            consultationStep: 1,
+        };
+        
+        const productDatabase = {
+            'p1': {
+                id: 'p1',
+                name: 'Signature Chocolate Truffle',
+                price: 85.00,
+                image: 'https://placehold.co/800x800/f3e8e8/5d0016?text=Chocolate+Truffle',
+                description: 'A decadent masterpiece of dark chocolate mousse, ganache, and a delicate cocoa glaze. This six-inch cake serves 8-10 and is our most requested classic. Gluten-free option available upon request.'
+            },
+            'p2': {
+                id: 'p2',
+                name: 'Lemon Meringue Tart',
+                price: 62.00,
+                image: 'https://placehold.co/800x800/f3e8e8/5d0016?text=Lemon+Tart',
+                description: 'A vibrant, zesty lemon curd in a sweet pastry crust, topped with soft, torched Italian meringue. This nine-inch tart is a refreshing and elegant centerpiece. Serves 6-8.'
+            },
+            'p3': {
+                id: 'p3',
+                name: 'Raspberry Pistachio Gâteau',
+                price: 95.00,
+                image: 'https://placehold.co/800x800/f3e8e8/5d0016?text=Raspberry+Pistachio',
+                description: 'Layers of delicate pistachio dacquoise, raspberry crémeux, and a light pistachio mousse. A sophisticated and beautifully balanced six-inch gâteau. Serves 8-10.'
+            },
+            'p4': {
+                id: 'p4',
+                name: 'Classic Vanilla Bean Mille-Feuille',
+                price: 70.00,
+                image: 'https://placehold.co/800x800/f3e8e8/5d0016?text=Mille-Feuille',
+                description: 'Three layers of impossibly crisp, caramelized puff pastry filled with a rich Tahitian vanilla bean pastry cream. A true classic of French patisserie. Sold as a 10-inch rectangle, serves 6.'
+            },
+            'p5': {
+                id: 'p5',
+                name: 'Gold-Leaf Opera Cake',
+                price: 110.00,
+                image: 'https://placehold.co/800x800/f3e8e8/5d0016?text=Opera+Cake',
+                description: 'An icon of elegance. Almond sponge cake soaked in coffee syrup, layered with coffee buttercream and chocolate ganache, and topped with a 24k gold-leaf chocolate glaze. Serves 10-12.'
+            },
+            'p6': {
+                id: 'p6',
+                name: 'Artisan Macaron Assortment',
+                price: 48.00,
+                image: 'https://placehold.co/800x800/f3e8e8/5d0016?text=Macarons',
+                description: 'A curated gift box of 12 assorted macarons, featuring our signature seasonal flavors. Includes combinations like Rose & Lychee, Pistachio, Salted Caramel, and Gold-Flecked Chocolate.'
+            }
+        };
+
+        /**
+         * =========================================
+         * CTO NOTE: CORE NAVIGATION (SPA ROUTER)
+         * =========================================
+         * This function simulates a Single Page Application (SPA).
+         * It finds the target page, hides all others, and 
+         * makes the target visible with an animation.
+         */
+         
+        const navigate = (pageId) => {
+            // Update app state
+            appState.activePage = pageId;
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the target page
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            } else {
+                console.error(`Navigation error: Page with ID 'page-${pageId}' not found.`);
+                document.getElementById('page-home').classList.add('active'); // Fallback to home
+            }
+            
+            // Update active state on nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.navlink === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile nav if open
+            document.getElementById('header-content').classList.remove('mobile-nav-open');
+            
+            // Scroll to top on page change
+            window.scrollTo(0, 0);
+            
+            // If navigating to 'shop', render the products
+            if (pageId === 'shop') {
+                renderShopProducts();
+            }
+        };
+
+        /**
+         * =========================================
+         * CTO NOTE: E-COMMERCE ENGINE
+         * =========================================
+         * A collection of functions to simulate a full
+         * e-commerce experience:
+         * - renderShopProducts: Builds the shop page grid.
+         * - viewProductDetails: Renders the PDP.
+         * - addToCart: Updates the appState.cart.
+         * - updateCartCount: Updates the header icon.
+         * - renderCart: Builds the cart summary in the modal.
+         */
+
+        const renderShopProducts = () => {
+            const gridTarget = document.getElementById('product-grid-target');
+            if (!gridTarget) return;
+            
+            let html = '';
+            for (const productId in productDatabase) {
+                const product = productDatabase[productId];
+                html += `
+                    <div class="product-card">
+                        <a href="#" class="product-card-image-link" data-product-id="${product.id}">
+                            <div class="product-card-image">
+                                <img src="${product.image}" alt="${product.name}">
+                            </div>
+                            <div class="product-card-content">
+                                <h4 class="product-card-title">${product.name}</h4>
+                                <div class="product-card-price">$${product.price.toFixed(2)}</div>
+                            </div>
+                        </a>
+                        <div class="product-card-content" style="padding-top: 0;">
+                            <button class="btn btn-primary btn-small add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            }
+            gridTarget.innerHTML = html;
+        };
+        
+        const viewProductDetails = (productId) => {
+            const product = productDatabase[productId];
+            if (!product) {
+                console.error(`PDP Error: Product with ID '${productId}' not found.`);
+                return;
+            }
+            
+            const pdpTarget = document.getElementById('pdp-content-target');
+            if (!pdpTarget) return;
+            
+            pdpTarget.innerHTML = `
+                <div class="pdp-image-gallery">
+                    <div class="pdp-main-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                </div>
+                <div class="pdp-details">
+                    <h1>${product.name}</h1>
+                    <div class="pdp-price">$${product.price.toFixed(2)}</div>
+                    <div class="pdp-description">
+                        <p>${product.description}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="pdp-quantity" class="form-label">Quantity</label>
+                        <div class="quantity-selector" data-product-id="${product.id}">
+                            <button class="quantity-btn" data-action="decrease">-</button>
+                            <input type="number" class="quantity-input pdp-quantity-input" value="1" min="1">
+                            <button class="quantity-btn" data-action="increase">+</button>
+                        </div>
+                    </div>
+                    <div class="pdp-actions">
+                        <button class="btn btn-primary btn-full pdp-add-to-cart-btn" data-product-id="${product.id}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Navigate to the PDP page
+            navigate('pdp');
+        };
+        
+        const addToCart = (productId, quantity) => {
+            const product = productDatabase[productId];
+            if (!product) return;
+            
+            quantity = parseInt(quantity, 10);
+            if (isNaN(quantity) || quantity < 1) {
+                quantity = 1;
+            }
+            
+            // Check if item is already in cart
+            const existingCartItem = appState.cart.find(item => item.id === productId);
+            
+            if (existingCartItem) {
+                existingCartItem.quantity += quantity;
+            } else {
+                appState.cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+            
+            // Log for demo
+            console.log('Cart Updated:', appState.cart);
+            
+            updateCartCount();
+            renderCartSummary(); // Re-render cart summary if modal is open
+            
+            // Show a simple confirmation
+            showNotification(`${product.name} added to cart.`);
+        };
+        
+        const updateCartQuantity = (productId, newQuantity) => {
+            newQuantity = parseInt(newQuantity, 10);
+            const cartItem = appState.cart.find(item => item.id === productId);
+            
+            if (!cartItem) return;
+
+            if (isNaN(newQuantity) || newQuantity < 1) {
+                // Remove item if quantity is zero or invalid
+                appState.cart = appState.cart.filter(item => item.id !== productId);
+            } else {
+                cartItem.quantity = newQuantity;
+            }
+            
+            updateCartCount();
+            renderCartSummary();
+        };
+
+        const removeFromCart = (productId) => {
+            appState.cart = appState.cart.filter(item => item.id !== productId);
+            updateCartCount();
+            renderCartSummary();
+        };
+        
+        const updateCartCount = () => {
+            const totalItems = appState.cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountEl = document.getElementById('cart-item-count');
+            
+            cartCountEl.textContent = totalItems;
+            
+            // Animate the counter
+            cartCountEl.style.transform = 'scale(1.2)';
+            cartCountEl.style.backgroundColor = 'var(--color-gold-light)';
+            setTimeout(() => {
+                cartCountEl.style.transform = 'scale(1)';
+                cartCountEl.style.backgroundColor = 'var(--color-gold)';
+            }, 200);
+        };
+        
+        const renderCartSummary = () => {
+            const itemsContainer = document.getElementById('cart-items-container');
+            const emptyMessage = document.getElementById('cart-empty-message');
+            const summaryBox = document.getElementById('cart-summary-box');
+            const checkoutFooter = document.getElementById('checkout-footer');
+            
+            if (appState.cart.length === 0) {
+                itemsContainer.innerHTML = '';
+                emptyMessage.style.display = 'block';
+                summaryBox.style.display = 'none';
+                // Hide checkout button, show "Continue Shopping"
+                document.getElementById('checkout-next-btn').style.display = 'none';
+            } else {
+                emptyMessage.style.display = 'none';
+                summaryBox.style.display = 'block';
+                document.getElementById('checkout-next-btn').style.display = 'block';
+                
+                let itemsHtml = '';
+                let subtotal = 0;
+                
+                appState.cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    
+                    itemsHtml += `
+                        <div class="cart-item">
+                            <div class="cart-item-image">
+                                <img src="${item.image}" alt="${item.name}">
+                            </div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                                <div class="cart-item-actions">
+                                    <div class="quantity-selector" data-product-id="${item.id}">
+                                        <button class="quantity-btn" data-action="decrease">-</button>
+                                        <input type="number" class="quantity-input cart-quantity-input" value="${item.quantity}" min="1" data-product-id="${item.id}">
+                                        <button class="quantity-btn" data-action="increase">+</button>
+                                    </div>
+                                    <button class="btn-link text-small cart-item-remove-btn" data-product-id="${item.id}">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                itemsContainer.innerHTML = itemsHtml;
+                
+                // Update totals
+                document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('cart-total').textContent = `$${subtotal.toFixed(2)}`;
+            }
+        };
+
+        const showNotification = (message) => {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'simple-notification';
+            notification.textContent = message;
+            
+            // Add styles dynamically
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--color-maroon)';
+            notification.style.color = 'var(--color-cream)';
+            notification.style.padding = '1rem 1.5rem';
+            notification.style.borderRadius = 'var(--border-radius)';
+            notification.style.boxShadow = 'var(--shadow-lg)';
+            notification.style.zIndex = '3000';
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateY(20px)';
+            notification.style.transition = 'all 0.3s ease';
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Animate out
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        };
+
+        /**
+         * =========================================
+         * CTO NOTE: CHECKOUT MODAL FLOW
+         * =========================================
+         * This controls the multi-step checkout modal.
+         */
+         
+        const modal = document.getElementById('checkout-modal');
+        const modalTitle = document.getElementById('checkout-modal-title');
+        const nextBtn = document.getElementById('checkout-next-btn');
+        const prevBtn = document.getElementById('checkout-prev-btn');
+        
+        const openCheckoutModal = () => {
+            appState.checkoutStep = 1;
+            renderCartSummary(); // Always show fresh cart
+            goToCheckoutStep(1);
+            modal.classList.add('active');
+        };
+        
+        const closeCheckoutModal = () => {
+            modal.classList.remove('active');
+        };
+        
+        const goToCheckoutStep = (step) => {
+            appState.checkoutStep = step;
+            
+            // Hide all steps
+            document.querySelectorAll('.checkout-step').forEach(el => el.classList.remove('active'));
+            // Show target step
+            document.querySelector(`.checkout-step[data-checkout-step="${step}"]`).classList.add('active');
+            
+            // Update modal title and buttons
+            switch(step) {
+                case 1:
+                    modalTitle.textContent = 'Your Cart';
+                    nextBtn.textContent = 'Proceed to Shipping';
+                    nextBtn.dataset.nextStep = '2';
+                    prevBtn.style.display = 'none';
+                    // Disable button if cart is empty
+                    nextBtn.style.display = appState.cart.length > 0 ? 'block' : 'none';
+                    break;
+                case 2:
+                    modalTitle.textContent = 'Shipping Details';
+                    nextBtn.textContent = 'Continue to Payment';
+                    nextBtn.dataset.nextStep = '3';
+                    prevBtn.style.display = 'block';
+                    prevBtn.dataset.prevStep = '1';
+                    break;
+                case 3:
+                    modalTitle.textContent = 'Payment Details';
+                    nextBtn.textContent = 'Place Your Order';
+                    nextBtn.dataset.nextStep = '4';
+                    prevBtn.style.display = 'block';
+                    prevBtn.dataset.prevStep = '2';
+                    break;
+                case 4:
+                    modalTitle.textContent = 'Order Confirmed';
+                    // Update confirmation details
+                    document.getElementById('conf-order-num').textContent = `NTE-${Math.floor(10000 + Math.random() * 90000)}`;
+                    document.getElementById('conf-order-total').textContent = document.getElementById('cart-total').textContent;
+                    document.getElementById('conf-order-email').textContent = document.getElementById('ship-email').value || 'your-email@example.com';
+                    
+                    // Hide main buttons, show "Close"
+                    nextBtn.textContent = 'Close';
+                    nextBtn.dataset.nextStep = 'close';
+                    prevBtn.style.display = 'none';
+                    
+                    // Clear the cart (simulation)
+                    appState.cart = [];
+                    updateCartCount();
+                    break;
+            }
+        };
+
+        /**
+         * =========================================
+         * CTO NOTE: CUSTOM STUDIO FORM
+         * =========================================
+         * This controls the multi-step consultation form
+         * for the high-ticket funnel.
+         */
+        
+        const consultForm = document.getElementById('consultation-form-main');
+        const consultFormSuccess = document.getElementById('consult-form-success');
+        const progressLine = document.getElementById('consult-progress-line');
+        const progressSteps = document.querySelectorAll('.consult-progress-step');
+        
+        const goToStudioStep = (step) => {
+            appState.consultationStep = step;
+            
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            // Show target step
+            document.querySelector(`.form-step[data-form-step="${step}"]`).classList.add('active');
+            
+            // Update progress bar
+            const stepPercentage = { 1: 0, 2: 50, 3: 100 };
+            progressLine.style.width = `${stepPercentage[step]}%`;
+            
+            progressSteps.forEach(pStep => {
+                if (parseInt(pStep.dataset.step, 10) <= step) {
+                    pStep.classList.add('active');
+                } else {
+                    pStep.classList.remove('active');
+                }
+            });
+        };
+        
+        const submitStudioForm = () => {
+            // Simple validation simulation
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            
+            if (!name || !email) {
+                alert('Please fill in your name and email to submit.');
+                return;
+            }
+            
+            // Hide form, show success
+            consultForm.style.display = 'none';
+            document.querySelector('.consult-progress-bar').style.display = 'none';
+            consultFormSuccess.style.display = 'block';
+            consultFormSuccess.style.animation = 'pageFadeIn 0.5s ease';
+        };
+        
+        const resetStudioForm = () => {
+            consultForm.reset();
+            goToStudioStep(1);
+            consultForm.style.display = 'block';
+            document.querySelector('.consult-progress-bar').style.display = 'flex';
+            consultFormSuccess.style.display = 'none';
+        };
+        
+        /**
+         * =========================================
+         * CTO NOTE: GALLERY LIGHTBOX
+         * =========================================
+         */
+        const lightbox = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-image');
+        
+        const openLightbox = (src) => {
+            lightboxImg.src = src;
+            lightbox.style.display = 'flex';
+        };
+        
+        const closeLightbox = () => {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+        };
+
+        /**
+         * =========================================
+         * CTO NOTE: EVENT LISTENERS INITIALIZATION
+         * =========================================
+         * This is the "main" function that connects all
+         * our logic to the HTML elements.
+         */
+        
+        const initEventListeners = () => {
+            
+            // --- Core Navigation ---
+            document.body.addEventListener('click', (e) => {
+                // Nav Links
+                const navLink = e.target.closest('[data-navlink]');
+                if (navLink) {
+                    e.preventDefault();
+                    navigate(navLink.dataset.navlink);
+                }
+                
+                // --- Mobile Nav Toggle ---
+                const mobileToggle = e.target.closest('#mobile-menu-toggle');
+                if (mobileToggle) {
+                    document.getElementById('header-content').classList.toggle('mobile-nav-open');
+                }
+            });
+            
+            // --- E-Commerce (Shop Page & PDP) ---
+            document.body.addEventListener('click', (e) => {
+                // 'View Details' on product card
+                const productLink = e.target.closest('.product-card-image-link');
+                if (productLink) {
+                    e.preventDefault();
+                    viewProductDetails(productLink.dataset.productId);
+                }
+                
+                // 'Add to Cart' on product card
+                const shopAtcBtn = e.target.closest('.add-to-cart-btn');
+                if (shopAtcBtn) {
+                    e.preventDefault();
+                    addToCart(shopAtcBtn.dataset.productId, 1);
+                }
+                
+                // 'Add to Cart' on PDP
+                const pdpAtcBtn = e.target.closest('.pdp-add-to-cart-btn');
+                if (pdpAtcBtn) {
+                    e.preventDefault();
+                    const quantity = document.querySelector('.pdp-quantity-input').value;
+                    addToCart(pdpAtcBtn.dataset.productId, quantity);
+                }
+                
+                // Quantity buttons (PDP and Cart)
+                const quantityBtn = e.target.closest('.quantity-btn');
+                if (quantityBtn) {
+                    const selector = quantityBtn.closest('.quantity-selector');
+                    const input = selector.querySelector('.quantity-input');
+                    let currentValue = parseInt(input.value, 10);
+                    
+                    if (quantityBtn.dataset.action === 'increase') {
+                        currentValue++;
+                    } else if (quantityBtn.dataset.action === 'decrease') {
+                        currentValue = Math.max(1, currentValue - 1);
+                    }
+                    input.value = currentValue;
+                    
+                    // If this is a cart quantity input, update cart state
+                    if (input.classList.contains('cart-quantity-input')) {
+                        updateCartQuantity(input.dataset.productId, currentValue);
+                    }
+                }
+            });
+            
+            // --- Checkout Modal ---
+            document.getElementById('cart-icon-wrapper').addEventListener('click', openCheckoutModal);
+            document.getElementById('checkout-close-btn').addEventListener('click', closeCheckoutModal);
+            document.getElementById('cart-continue-shopping-btn').addEventListener('click', () => {
+                closeCheckoutModal();
+                navigate('shop');
+            });
+            
+            // Checkout Next/Prev Buttons
+            nextBtn.addEventListener('click', () => {
+                const nextStep = nextBtn.dataset.nextStep;
+                if (nextStep === 'close') {
+                    closeCheckoutModal();
+                } else {
+                    goToCheckoutStep(parseInt(nextStep, 10));
+                }
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                goToCheckoutStep(parseInt(prevBtn.dataset.prevStep, 10));
+            });
+            
+            // Cart item interactions (remove, quantity change)
+            document.getElementById('cart-items-container').addEventListener('click', (e) => {
+                // Remove button
+                const removeBtn = e.target.closest('.cart-item-remove-btn');
+                if (removeBtn) {
+                    removeFromCart(removeBtn.dataset.productId);
+                }
+            });
+            document.getElementById('cart-items-container').addEventListener('change', (e) => {
+                // Quantity input change
+                const quantityInput = e.target.closest('.cart-quantity-input');
+                if (quantityInput) {
+                    updateCartQuantity(quantityInput.dataset.productId, quantityInput.value);
+                }
+            });
+
+            // --- Custom Studio Form ---
+            consultForm.addEventListener('click', (e) => {
+                const nextBtn = e.target.closest('[data-form-next]');
+                const prevBtn = e.target.closest('[data-form-prev]');
+                
+                if (nextBtn) {
+                    goToStudioStep(parseInt(nextBtn.dataset.formNext, 10));
+                } else if (prevBtn) {
+                    goToStudioStep(parseInt(prevBtn.dataset.formPrev, 10));
+                }
+            });
+            
+            document.getElementById('submit-consult-form').addEventListener('click', submitStudioForm);
+            document.getElementById('consult-form-reset').addEventListener('click', resetStudioForm);
+
+            // --- Gallery Lightbox ---
+            document.getElementById('gallery-grid').addEventListener('click', (e) => {
+                const galleryItem = e.target.closest('.gallery-item');
+                if (galleryItem) {
+                    const img = galleryItem.querySelector('img');
+                    if(img && img.dataset.lightboxSrc) {
+                        openLightbox(img.dataset.lightboxSrc);
+                    }
+                }
+            });
+            
+            lightbox.addEventListener('click', closeLightbox);
+            document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        };
+        
+        /**
+         * =========================================
+         * CTO NOTE: APPLICATION INITIALIZATION
+         * =========================================
+         */
+        const initApp = () => {
+            console.log('Initializing Nanté Patisserie Simulation...');
+            initEventListeners();
+            
+            // Initial render of the shop
+            renderShopProducts();
+            
+            // Set initial page (in case of deep link, but here just 'home')
+            navigate('home');
+            console.log('Application Ready.');
+        };
+        
+        // Run the application
+        initApp();
+    
+    });
+    </script>
+</body>
+</html>
