@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Candleyyours | Jetweb Labs</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Google Fonts: Playfair Display (Serif) & Inter (Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0;700;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Configure Tailwind with the brand's custom fonts and color palette -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'brand-beige': '#F5F5DC',      // Main beige
+                        'brand-brown': '#8B4513',      // Warm brown
+                        'brand-gold': '#FFD700',       // Gold accents
+                        'brand-offwhite': '#FAF9F6',   // Off-white bg
+                        'brand-brown-light': '#A0522D', // Lighter brown for accents
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Internal CSS for custom styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF9F6; /* brand-offwhite */
+            color: #8B4513; /* brand-brown */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Pricing Card Styles */
+        .pricing-card {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .pricing-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: var(--delay, 0s);
+        }
+
+        /* The "Hero" plan highlighting */
+        .pricing-card-hero {
+            border-color: #FFD700; /* brand-gold */
+            transform: scale(1.05); /* Make it pop on desktop */
+            z-index: 10;
+        }
+        
+        /* Checkmark & Cross Styles */
+        .check {
+            color: #10B981; /* Green */
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .cross {
+            color: #EF4444; /* Red */
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* * ========================================
+         * Responsive Table CSS
+         * ========================================
+        */
+        @media (max-width: 768px) {
+            .comparison-table {
+                display: block;
+                width: 100%;
+            }
+            .comparison-table thead {
+                display: none; /* Hide desktop headers */
+            }
+            .comparison-table tbody {
+                display: block;
+                width: 100%;
+            }
+            .comparison-table tr {
+                display: block;
+                width: 100%;
+                margin-bottom: 1.5rem;
+                border: 2px solid #E5E7EB;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            }
+            .comparison-table tr.section-header {
+                border: none;
+                margin-bottom: 0.5rem;
+                box-shadow: none;
+            }
+            .comparison-table tr.section-header td {
+                padding: 0.5rem 0;
+                font-size: 1.25rem;
+                text-align: left;
+                background-color: transparent !important;
+                color: #8B4513; /* brand-brown */
+            }
+            
+            .comparison-table td {
+                display: flex; /* This is the key */
+                justify-content: space-between; /* This is the key */
+                align-items: center;
+                width: 100%;
+                text-align: right;
+                padding: 1rem;
+                border-bottom: 1px solid #F3F4F6;
+                font-size: 0.9rem;
+            }
+            .comparison-table td:last-child {
+                border-bottom: none;
+            }
+
+            /* This creates the text label on the left from the data-label attribute */
+            .comparison-table td::before {
+                content: attr(data-label); /* Use the HTML data-label */
+                font-weight: 600;
+                color: #374151;
+                text-align: left;
+                padding-right: 1rem; /* Add some spacing */
+            }
+            
+            /* This is the first cell (feature name), which acts as the header card */
+            .comparison-table td.feature-name {
+                background-color: #8B4513; /* brand-brown */
+                color: #FAF9F6; /* brand-offwhite */
+                text-align: left;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 1rem;
+                display: block; /* Override flex */
+            }
+            
+            /* Hide the ::before pseudo-element for the feature-name cell */
+            .comparison-table td.feature-name::before {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-brand-offwhite">
+
+    <!-- Header -->
+    <header class="py-5 border-b border-gray-200 bg-brand-offwhite">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-3xl font-serif text-brand-brown">Jetweb Labs</h1>
+            <nav>
+                <a href="#pricing" class="font-sans font-medium text-brand-brown-light hover:text-brand-brown">Pricing</a>
+                <a href="#compare" class="font-sans font-medium text-brand-brown-light hover:text-brand-brown ml-6">Compare</a>
+                <a href="#cta" class="font-sans font-medium text-brand-brown-light hover:text-brand-brown ml-6">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Section 1: Hero & Pricing Table -->
+        <section id="pricing" class="py-20 md:py-32" style="background-color: #F8F6F1;">
+            <div class="container mx-auto px-6">
+                <!-- Heading -->
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-serif text-brand-brown">Choose Your Perfect Plan</h2>
+                    <p class="text-lg text-brand-brown-light mt-4">We have a plan to match your premium brand, whether you're just starting or ready for a full e-commerce engine.</p>
+                </div>
+
+                <!-- Pricing Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
+
+                    <!-- Plan 1: Starter (The Decoy) -->
+                    <div class="pricing-card bg-white border border-gray-200 rounded-xl shadow-lg p-8 flex flex-col" style="--delay: 0.1s;">
+                        <h3 class="text-2xl font-serif text-brand-brown">Starter</h3>
+                        <p class="text-brand-brown-light text-sm mt-1">Get online fast.</p>
+                        
+                        <div class="text-4xl font-serif text-brand-brown my-6">
+                            ₹2,999
+                            <span class="text-2xl text-brand-brown-light block md:inline">/ ~£30</span>
+                        </div>
+                        <p class="text-sm font-sans text-gray-500 -mt-4 mb-6">one-time</p>
+                        
+                        <p class="text-gray-600 mb-6">A beautiful, single-page "digital business card" that funnels all customers to your WhatsApp or Email.</p>
+                        
+                        <ul class="space-y-3 text-gray-700 mb-8 flex-grow">
+                            <li class="flex items-center"><span class="check mr-3">✓</span>1-Page Professional Site</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>WhatsApp Order Redirect</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>.jetweblabs.in Subdomain</li>
+                        </ul>
+                        
+                        <a href="https://ig.me/m/jetweblabs" target="_blank" class="w-full text-center bg-brand-brown text-white py-3 px-6 rounded-lg font-serif text-lg hover:bg-brand-brown-light transition-colors">
+                            Get Started
+                        </a>
+                    </div>
+
+                    <!-- Plan 2: Pro E-commerce (THE HERO) -->
+                    <div class="pricing-card pricing-card-hero bg-white border-4 border-brand-gold rounded-xl shadow-2xl p-8 flex flex-col relative" style="--delay: 0s;">
+                        <div class="absolute -top-4 right-6 bg-brand-gold text-brand-brown font-sans text-sm font-bold py-2 px-5 rounded-md">MOST POPULAR</div>
+                        
+                        <h3 class="text-2xl font-serif text-brand-brown">Pro E-commerce</h3>
+                        <p class="text-brand-brown-light text-sm mt-1">Build your premium business.</p>
+                        
+                        <div class="text-5xl font-serif text-brand-brown my-6">
+                            ₹12,999
+                            <span class="text-3xl text-brand-brown-light block md:inline">/ ~£130</span>
+                        </div>
+                        <p class="text-sm font-sans text-gray-500 -mt-4 mb-6">one-time</p>
+                        
+                        <p class="text-gray-600 mb-6">Everything from the demo. A full e-commerce store with cart, payments, and your Corporate Order form.</p>
+                        
+                        <ul class="space-y-3 text-gray-700 mb-8 flex-grow">
+                            <li class="flex items-center"><span class="check mr-3">✓</span><strong>Everything in Starter, PLUS:</strong></li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>Full E-commerce Store</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>Shopping Cart & Checkout</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>Online Payment Gateway Setup</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span><strong>Corporate & Bulk Order Form</strong></li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span><strong>Free</strong> .com Domain</li>
+                        </ul>
+                        
+                        <a href="https://ig.me/m/jetweblabs" target="_blank" class="w-full text-center bg-brand-gold text-brand-brown font-serif text-lg font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition-colors">
+                            Get Started
+                        </a>
+                    </div>
+
+                    <!-- Plan 3: Growth Partner (The Anchor) -->
+                    <div class="pricing-card bg-white border border-gray-200 rounded-xl shadow-lg p-8 flex flex-col" style="--delay: 0.2s;">
+                        <h3 class="text-2xl font-serif text-brand-brown">Growth Partner</h3>
+                        <p class="text-brand-brown-light text-sm mt-1">Dominate your market.</p>
+                        
+                        <div class="text-4xl font-serif text-brand-brown my-6">
+                            ₹24,999
+                            <span class="text-2xl text-brand-brown-light block md:inline">/ ~£250</span>
+                        </div>
+                        <p class="text-sm font-sans text-gray-500 -mt-4 mb-3">one-time</p>
+                        <p class="text-center font-bold text-gray-700 mb-6">+ ₹5,999 / ~£60 per month</p>
+                        
+                        <p class="text-gray-600 mb-6">Your complete outsourced tech and marketing team. We build the store, then we run your social media and SEO.</p>
+                        
+                        <ul class="space-y-3 text-gray-700 mb-8 flex-grow">
+                            <li class="flex items-center"><span class="check mr-3">✓</span><strong>Everything in Pro, PLUS:</strong></li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>Monthly Social Media Mgmt</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>Monthly SEO & Blogging</li>
+                            <li class="flex items-center"><span class="check mr-3">✓</span>Priority Support</li>
+                        </ul>
+                        
+                        <a href="https://ig.me/m/jetweblabs" target="_blank" class="w-full text-center bg-brand-brown text-white py-3 px-6 rounded-lg font-serif text-lg hover:bg-brand-brown-light transition-colors">
+                            Get Started
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Feature Comparison Table -->
+        <section id="compare" class="py-20 md:py-32 bg-brand-offwhite">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-serif text-brand-brown">The Nitty-Gritty Details</h2>
+                    <p class="text-lg text-brand-brown-light mt-4">See exactly what you get. The "Pro" plan includes every feature we showed you in the demo.</p>
+                </div>
+
+                <!-- 
+                  Responsive Table:
+                  On desktop, it's a standard <table>.
+                  On mobile, CSS transforms it into a list of "cards" for readability.
+                -->
+                <table class="comparison-table w-full max-w-6xl mx-auto text-center">
+                    <thead class="bg-brand-beige">
+                        <tr>
+                            <th class="p-6 text-left font-serif text-lg">Features</th>
+                            <th class="p-6 font-serif text-lg">Starter</th>
+                            <th class="p-6 font-serif text-lg text-brand-brown-light">Pro E-commerce</th>
+                            <th class="p-6 font-serif text-lg">Growth Partner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- START: Fixed Pricing Rows -->
+                        <tr class="bg-white">
+                            <td class="feature-name p-4 text-left text-gray-700 font-serif !text-lg !bg-white">Price (One-time)</td>
+                            <td data-label="Starter" class="plan-starter font-sans font-bold text-gray-700 text-base">₹2,999 / ~£30</td>
+                            <td data-label="Pro E-commerce" class="plan-pro font-sans font-bold text-brand-brown-light text-base">₹12,999 / ~£130</td>
+                            <td data-label="Growth Partner" class="plan-growth font-sans font-bold text-gray-700 text-base">₹24,999 / ~£250</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="feature-name p-4 text-left text-gray-700 font-serif !text-lg !bg-white">Monthly Fee</td>
+                            <td data-label="Starter" class="plan-starter font-sans font-bold text-gray-700 text-base">None</td>
+                            <td data-label="Pro E-commerce" class="plan-pro font-sans font-bold text-gray-700 text-base">None</td>
+                            <td data-label="Growth Partner" class="plan-growth font-sans font-bold text-gray-700 text-base">₹5,999 / ~£60</td>
+                        </tr>
+                        <!-- END: Fixed Pricing Rows -->
+
+                        <!-- Section Header -->
+                        <tr class="section-header">
+                            <td colspan="4" class="p-4 bg-brand-offwhite text-left font-serif text-2xl text-brand-brown">
+                                Core Website Features
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">1-Page Professional Site</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Unlimited Pages</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Custom .com Domain (Free 1st Year)</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">.jetweblabs.in Subdomain</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="cross">✗</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Mobile & Tablet Optimized</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+
+                        <!-- Section Header -->
+                        <tr class="section-header">
+                            <td colspan="4" class="p-4 bg-brand-offwhite text-left font-serif text-2xl text-brand-brown">
+                                E-commerce & Automation
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">WhatsApp/Email Order Redirect</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Full Shopping Cart & Checkout</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Online Payment Gateway (Stripe, etc.)</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Full Admin Panel</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700"><strong>Corporate & Bulk Order Form</strong></td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Add/Edit Unlimited Products</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+
+                        <!-- Section Header -->
+                        <tr class="section-header">
+                            <td colspan="4" class="p-4 bg-brand-offwhite text-left font-serif text-2xl text-brand-brown">
+                                Hosting & Support
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Secure SSL Certificate</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Premium Web Hosting</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Email & WhatsApp Support</td>
+                            <td data-label="Starter" class="plan-starter"><span class="check">✓</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Priority Support</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="cross">✗</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        
+                        <!-- Section Header -->
+                        <tr class="section-header">
+                            <td colspan="4" class="p-4 bg-brand-offwhite text-left font-serif text-2xl text-brand-brown">
+                                Marketing & Growth
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Basic SEO Setup</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="check">✓</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Monthly Social Media Management</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="cross">✗</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name p-4 text-left text-gray-700">Monthly SEO & Blog Content</td>
+                            <td data-label="Starter" class="plan-starter"><span class="cross">✗</span></td>
+                            <td data-label="Pro E-commerce" class="plan-pro"><span class="cross">✗</span></td>
+                            <td data-label="Growth Partner" class="plan-growth"><span class="check">✓</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Final CTA -->
+        <section id="cta" class="py-20 md:py-32" style="background-color: #F8F6F1;">
+            <div class="container mx-auto px-6 text-center max-w-2xl">
+                <h2 class="text-4xl md:text-5xl font-serif text-brand-brown">Ready to light up your brand?</h2>
+                <p class="text-lg text-brand-brown-light mt-6 mb-10">We're excited to partner with Candleyyours. To get started, let's chat. Send us a message on Instagram and we'll secure your spot and start the design process immediately.</p>
+                <a href="https://ig.me/m/jetweblabs" target="_blank" class="inline-block bg-brand-gold text-brand-brown font-serif font-bold text-xl py-4 px-12 rounded-lg shadow-lg hover:bg-yellow-400 transition-colors transform hover:scale-105">
+                    Start Our Chat on Instagram
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-brand-brown text-gray-400">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-brand-beige/80">&copy; 2025 JetWebLabs. All rights reserved. Pricing for Candleyyours.</p>
+        </div>
+    </footer>
+    
+    <!-- 
+      JavaScript for animations
+      This adds the subtle "fade-in-up" effect on the pricing cards.
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.pricing-card');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                cards.forEach(card => {
+                    observer.observe(card);
+                });
+            } else {
+                // Fallback for older browsers
+                cards.forEach(card => {
+                    card.classList.add('is-visible');
+                    card.style.opacity = 1;
+                    card.style.transform = 'none';
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
